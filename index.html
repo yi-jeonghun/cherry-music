@@ -1,1 +1,273 @@
-test
+<html>
+<head>
+	<title>망고</title>
+	<meta charset="UTF-8">
+	
+	<meta name="description" content="New way to listen to Youtube music">
+	<meta name="keywords" content="">
+	<meta property="og:title" content="Cherry Music" />
+	<meta property="og:description" content="New way to listen to Youtube music">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/css/slider.css">
+	<script data-ad-client="ca-pub-3508611654022607" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+	<link rel="stylesheet" type="text/css" href="/lib/bootstrap-4.6.0-dist/css/bootstrap.min.css">
+
+	<link rel="stylesheet" type="text/css" href="/lib/fontawesome-free-5.10.1-web/css/fontawesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/lib/fontawesome-free-5.10.1-web/css/brands.min.css">
+	<link rel="stylesheet" type="text/css" href="/lib/fontawesome-free-5.10.1-web/css/solid.min.css">
+	
+	<script type="text/javascript" src="/lib/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="/lib/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="/js/util.js"></script>
+	<script type="text/javascript" src="/lib/Sortable.js"></script>
+
+		<script type="text/javascript" src="/js/const/country_code.js"></script>
+		<script type="text/javascript" src="/js/const/country_data.js"></script>
+		<script type="text/javascript" src="/js/const/country_control.js"></script>
+		<script type="text/javascript" src="/js/const/top_100_source.js"></script>
+		<script type="text/javascript" src="/js/lang.js"></script>
+
+		<script type="text/javascript" src="/js/youtube_iframe_player.js"></script>
+		<script type="text/javascript" src="/js/router.js"></script>
+		<script type="text/javascript" src="/js/cherry_player.js"></script>
+		<script type="text/javascript" src="/js/slider_control.js"></script>
+	
+		<!-- control.js 항상 마지막에 위치해야 함. -->
+		<script type="text/javascript" src="/js/control.js"></script>
+
+</head>
+<body>
+	<script>new CountryControl().LoadCountryCode()</script>
+
+	<!-- Main -->
+	<div class="main_div">
+		<div class="container">
+			<div class="row">
+				<div class="col-10" style="padding-top: 5px; padding-bottom: 5px; display:">
+					<!-- <i id="id_btn_menu_open" class="fas fa-bars" style="font-size: 1.5em; cursor: pointer;"></i> -->
+					<span style="font-size: 2em; padding-left: 5px; cursor: pointer" onclick="window._router.GoHome()">망고</span>	
+				</div>
+				<div class="col-2 text-right" style="padding-top: 20px; padding-right: 10px;">
+					<img id="id_btn_flag" data-toggle="modal" data-target="#modal_choose_country" style="width: 30px; border: solid 0.5px #bbbbbb; cursor: pointer;">
+				</div>
+			</div>
+		</div>
+
+		<!-- FIXME : 점점 많아져서 나중에는 성능 이슈가 발생할 것 같다. -->
+		<div id="id_router-home"></div>
+		<div id="id_router-top_rank"></div>
+		<div id="id_router-artist"></div>
+		<div id="id_router-search"></div>
+		<div id="id_router-my_playlist"></div>
+		<div id="id_router-my_playlist_detail"></div>
+		<div id="id_router-open_playlist"></div>
+		<div id="id_router-open_playlist_detail"></div>
+		<div id="id_router-like"></div>
+		<div id="id_router-music"></div>
+		<div id="id_router-radio_list"></div>
+		<div id="id_router-radio_detail"></div>
+		<div id="id_router-era"></div>
+		<div id="id_router-era_chart"></div>
+	</div>
+
+	<!-- Menu -->
+	<div class="menu_div" id="id_menu_div">
+		<div style="height: 100%; padding: 0px;">
+			<div style="background-color: white; height: 100%; width: 80%; opacity: 1; padding-left: 10px; padding-right: 10px;">
+				<div class="text-right w-100" style="padding-top: 5px; padding-right: 10px;">
+					<i id="id_btn_close_menu" class="fas fa-times" style="font-size: 2.5em; cursor: pointer;"></i>
+				</div>
+				<%- include('include/google_auth_html.ejs') %>
+				<hr></hr>
+				<div id="id_div_index_menu_top_rank_list">
+					<button type="button" class="btn btn-sm btn-light" style="width: 100%; text-align: left;">
+						Top 100
+					</button>
+				</div>
+				<div style="margin-top: 5px;">
+					<button onClick="window._main.OnClick_Menu('like')" type="button" class="btn btn-sm btn-light" style="width: 100%; text-align: left;">
+						Like
+					</button>
+				</div>
+				<div style="margin-top: 5px;">
+					<button onClick="window._main.OnClick_Menu('my_playlist')" type="button" class="btn btn-sm btn-light" style="width: 100%; text-align: left;">
+						My Playlist
+					</button>
+				</div>
+				<div style="margin-top: 5px;">
+					<button onClick="window._main.OnClick_Menu('open_playlist')" type="button" class="btn btn-sm btn-light" style="width: 100%; text-align: left;">
+						Open Playlist
+					</button>
+				</div>
+				<!-- 
+				<div style="margin-top: 5px;">
+					<button onClick="window._main.OnClick_Menu('radio')" type="button" class="btn btn-sm btn-light" style="width: 100%; text-align: left;">
+						Radio
+					</button>
+				</div> 
+				-->
+				<div style="margin-top: 5px;">
+					<button onClick="window._main.OnClick_Menu('era')" type="button" class="btn btn-sm btn-light" style="width: 100%; text-align: left;">
+						<span id="id_label_menu_era">Chart By Era</span>
+					</button>
+				</div>
+				<div style="margin-top: 5px;">
+					<button onClick="window._main.OnClick_Menu('search')" type="button" class="btn btn-sm btn-light" style="width: 100%; text-align: left;">
+						<span id="id_label_menu_search">Search</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- toast -->
+	<div class="cherry_toast">
+		<div id="id_cherry_toast_text" style="width:auto;	background-color: white;	border: 1px solid gray;		border-radius: 1em;	"></div>
+	</div>
+	
+	<!-- PLAYER -->
+	<div class="slider_div">
+		<div class="slider_filler" id="id_slider_filler"></div>
+		<input type="range" min="0" max="10000" value="0" class="slider" id="id_slider_range">
+	</div>
+	
+	<div class="player_div">
+		<div class="player_video_div">
+			<div id="player" style="width: 100; height: 100; border: 1px solid black;"></div>
+		</div>
+		<div class="player_info_div border" style="height:100px; overflow: auto;">
+			<div id="id_label_title" class="">Title</div>
+			<div id="id_label_artist" class="label_artist">Artist</div>
+			<div class="d-flex">
+				<div id="id_div_duration" class="col-6 px-0" style="font-size: 0.8em;"></div>
+				<div class="col-6 text-right px-0">
+					<span id="id_btn_player_lyrics" class="badge badge-sm badge-secondary m-1 py-2 pointer">
+						<script>TRP(L_LYRICS)</script>
+					</span>	
+				</div>
+			</div>
+		</div>	
+		<div class="controller_div border text-right">
+			<div>
+				<i id="id_btn_play_pause" class="fas fa-play          play_button_disabled" style="margin-left: 1px; margin-right: 1px"></i>
+				<i id="id_btn_next"       class="fas fa-step-forward  play_button_disabled"></i>
+			</div>
+			<div style="padding-top: 4px;">
+				<button type="button" class="btn btn-sm btn-dark" id="id_btn_seq_type">
+					<i id="id_icon_seq_type" class="fas fa-sort-numeric-down"></i>
+				</button>
+				<button type="button" class="btn btn-sm btn-dark" id="id_btn_repeat_type">
+					<i id="id_icon_repeat_type" class="fas fa-reply-all"></i>
+				</button>
+			</div>
+			<div style="padding-top: 4px;">
+				<button type="button" class="btn btn-sm btn-dark" id="id_btn_volume">
+					<i class="fas fa-volume-up"></i>
+				</button>
+				<button type="button" class="btn btn-sm btn-dark" id="id_btn_playlist_show">
+					<i class="fas fa-list"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- PLAYER MUSIC LIST -->
+	<div class="player_music_list" id="id_player_music_list_div">
+		<div class="container" style="height: 100%;">
+			<div class="row" style="border-bottom: 1px solid gray; height: 40px;">
+				<div class="col-6" style="padding-top: 5px;"><h4>Play List</h4></div>
+				<div class="col-6" style="text-align: right; padding-top: 5px;">
+					<span class="badge badge-sm border" id="id_btn_music_list_sort" style="width: 25px;">
+						<i class="fas fa-sort"></i>
+					</span>
+					<span class="badge badge-sm border" id="id_btn_music_list_trash" style="width: 25px;">
+						<i class="fas fa-trash-alt"></i>
+					</span>
+					<span class="badge badge-sm border" id="id_btn_playlist_edit_mode_toggle" style="width: 25px;">
+						<i class="fas fa-ellipsis-h"></i>
+					</span>
+					<span class="badge badge-sm border" id="id_btn_playlist_hide" style="width: 60px;">
+						<i class="fas fa-chevron-down"></i>
+					</span>	
+				</div>
+			</div>
+			<div class="row" style="height: calc(100% - 40px); overflow-y: auto;">
+				<div class="col-12">
+					<div class="          " id="id_div_cherry_player_music_list"></div>
+					<div class="list-group" id="id_div_cherry_player_music_list_sort"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- LYRICS -->
+	<div class="player_lyrics_div" id="id_player_lyrics_div">
+		<div class="container" style="height: 100%;">
+			<div class="row border-bottom" style="height: 40px;">
+				<div class="col-8" style="padding-top: 5px;"><h4><script>TRP(L_LYRICS)</script></h4></div>
+				<div class="col-4" style="text-align: right; padding-top: 5px;">
+					<button type="button" class="btn btn-light" id="id_btn_lyrics_hide" style="width: 60px;">
+						<i class="fas fa-chevron-down"></i>
+					</button>	
+				</div>
+			</div>
+			<div class="row" style="height: calc(100% - 40px); overflow-y: auto;">
+				<div class="col-12">
+					<div class="container-fluid pt-2 pb-5" id="id_div_lyrics"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+  <!-- Volume Control -->
+	<div class="player_volume_div border" style="background-color: white; height: 50px;">
+		<div class="d-flex py-3">
+			<div class="col-2"></div>
+			<div class="col-8 px-0">
+				<input class="" type="range" min="0" max="100" value="50" id="id_slider_volume" style="width: 100%;">
+			</div>
+			<div class="col-2">
+				<span class="text-left pointer" id="id_btn_player_close_volume_control">
+					<i style="font-size: 1.3em;" class="fas fa-times"></i>
+				</span>
+			</div>
+		</div>
+  </div>
+
+
+</body>
+</html>
+
+<!-- Modal -->
+<div class="modal fade" id="modal_choose_country" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="id_modal_choose_country" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="id_modal_choose_country">Country</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" id="id_div_country_list"></div>
+		</div>
+	</div>
+</div>
+
+<!-- Confirm Modal -->
+<div class="modal fade" id="modal_confirm" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-body" id="id_model_confirm_content"></div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">No</button>
+				<button type="button" class="btn btn-sm btn-primary" id="id_btn_model_confirm_ok">Yes</button>
+			</div>
+		</div>
+	</div>
+</div>
