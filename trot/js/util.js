@@ -2,7 +2,7 @@
 function MusicItem(m){
 	var on_click = `SendMusicToPlayer('${m.title}', '', '${m.video_id}')`;
 	var h = `
-	<div class="row border-top border-bottom px-0">
+	<div class="row border-bottom px-0 py-1">
 		<div class="col-3 px-0">
 			<img style="width: 100%; height: auto;" src="https://img.youtube.com/vi/${m.video_id}/0.jpg">
 		</div>

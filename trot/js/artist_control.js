@@ -24,7 +24,7 @@ function ArtistControl(){
 				var a = artist_list[i];
 				var on_click_artist = `window._artist_control.OnClick_ChooseArtist('${a.name}', '${a.artist_uid}')`;
 				h += `
-				<div class="row border-top px-0">
+				<div class="row border-bottom px-0">
 					<div class="col-12 px-0 py-1" style="cursor:pointer" onClick="${on_click_artist}">
 						${a.name}
 					</div>
