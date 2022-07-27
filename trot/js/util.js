@@ -1,6 +1,6 @@
 
 function MusicItem(m){
-	var on_click = `SendMusicToPlayer('${m.title}', '', '${m.video_id}')`;
+	var on_click = `SendMusicToPlayer('${m.music_uid}', '${m.title}', '${m.artist_uid}', '${m.artist}', '${m.video_id}')`;
 	var h = `
 	<div class="row border-bottom px-0 py-1">
 		<div class="col-3 px-0">
@@ -19,12 +19,16 @@ function MusicItem(m){
 	return h;
 }
 
-function SendMusicToPlayer(title, artist, video_id){
+function SendMusicToPlayer(music_uid, title, artist_uid, artist, video_id){
 	var message = {
 		head: 'mango',
-		video_id: video_id,
-		title: title,
-		artist: artist
+		music: {
+			music_uid: music_uid,
+			title: title,
+			artist_uid: artist_uid,
+			artist: artist,
+			video_id: video_id,
+		}
 	};
 	parent.postMessage(message, "*");
 }
