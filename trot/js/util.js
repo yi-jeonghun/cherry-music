@@ -1,6 +1,11 @@
 
 function MusicItem(m){
-	var on_click = `SendMusicToPlayer('${m.music_uid}', '${m.title}', '${m.artist_uid}', '${m.artist}', '${m.video_id}')`;
+	var on_click_play = `SendMusicToPlayer('${m.music_uid}', '${m.title}', '${m.artist_uid}', '${m.artist}', '${m.video_id}')`;
+	var on_click_like = `window._favorite_control.OnClickLike('${m.music_uid}')`;
+	var heart_color = 'Black';
+	if(window._favorite_control.Find(m.music_uid)){
+		heart_color = 'Red';
+	}
 	var h = `
 	<div class="row border-bottom px-0 py-1">
 		<div class="col-3 px-0">
@@ -9,10 +14,17 @@ function MusicItem(m){
 		<div class="col-7 px-2">
 			${m.title}
 		</div>
-		<div class="col-2 px-0 my-auto text-right">
-			<button type="button" class="btn btn-light" onClick="${on_click}">
-				<i id="id_btn_play_pause" class="fas fa-play" style="font-size: 1em;"></i>
-			</button>						
+		<div class="col-2 px-0 my-auto text-center">
+			<div style="margin-bottom:2px">
+				<button type="button" class="btn border" onClick="${on_click_play}">
+					<i id="" class="fas fa-play" style="font-size: 1em;"></i>
+				</button>						
+			</div>
+			<div>
+				<button type="button" class="btn border" onClick="${on_click_like}" style="color:${heart_color}">
+					<i id="id_btn_heart_${m.music_uid}" class="fas fa-heart" style="font-size: 1em;"></i>
+				</button>						
+			</div>
 		</div>
 	</div>
 	`;
