@@ -22,11 +22,21 @@ function ArtistControl(){
 			var h = ``;
 			for(var i=0 ; i<artist_list.length ; i++){
 				var a = artist_list[i];
+				var heart_color = 'Black';
+				if(window._favorite_control.FindArtist(a.artist_uid)){
+					heart_color = 'Red';
+				}			
 				var on_click_artist = `window._artist_control.OnClick_ChooseArtist('${a.name}', '${a.artist_uid}')`;
+				var on_click_like = `window._favorite_control.OnClickLikeArtist('${a.artist_uid}', '${a.name}')`;
 				h += `
 				<div class="row border-bottom px-0">
-					<div class="col-12 px-0 py-1" style="cursor:pointer" onClick="${on_click_artist}">
+					<div class="col-10 px-0 py-1" style="cursor:pointer" onClick="${on_click_artist}">
 						${a.name}
+					</div>
+					<div class="col-2">
+						<button type="button" class="btn border" onClick="${on_click_like}" style="color:${heart_color}">
+							<i id="id_btn_heart_${a.artist_uid}" class="fas fa-heart" style="font-size: 1em;"></i>
+						</button>
 					</div>
 				</div>
 				`;
