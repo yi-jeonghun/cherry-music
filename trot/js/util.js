@@ -1,9 +1,9 @@
 
 function MusicItem(m){
 	var on_click_play = `SendMusicToPlayer('${m.music_uid}', '${m.title}', '${m.artist_uid}', '${m.artist}', '${m.video_id}')`;
-	var on_click_like = `window._favorite_control.OnClickLike('${m.music_uid}')`;
+	var on_click_like = `window._favorite_control.OnClickLikeMusic('${m.music_uid}', '${m.title}', '${m.artist_uid}', '${m.artist}', '${m.video_id}')`;
 	var heart_color = 'Black';
-	if(window._favorite_control.Find(m.music_uid)){
+	if(window._favorite_control.FindMusic(m.music_uid)){
 		heart_color = 'Red';
 	}
 	var h = `
