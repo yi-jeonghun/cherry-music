@@ -4,37 +4,33 @@ $('document').ready(function(){
 
 function FavoriteControl(){
 	var self = this;
-	this._music_list = [];
+	this._music_list_single = [];
+	this._music_list_multi = [];
 	this._artist_list = [];
 
 	this.Init = function(){
-		self.LoadMusic();
+		self.LoadMusicSingle();
+		self.LoadMusicMulti();
 		self.LoadArtist();
 		return this;
 	};
 
 	//==============================================================================
 
-	this.LoadMusic = function(){
-		var music_list = window.localStorage.getItem('FAVORITE_MUSIC_LIST');
-		if(music_list != null){
-			self._music_list = JSON.parse(music_list);
+	this.OnClickLikeMusic = function(music_uid, title, artist_uid, artist, video_id, is_multiple){
+		var found = false;
+		if(is_multiple){
+			found = self.FindMusicMulti(music_uid);
+		}else{
+			found = self.FindMusicSingle(music_uid);			
 		}
-	};
-
-	this.GetMusicList = function(){
-		return self._music_list;
-	};
-
-	this.SaveMusic = function(){
-		window.localStorage.setItem('FAVORITE_MUSIC_LIST', JSON.stringify(self._music_list));
-	};
-
-	this.OnClickLikeMusic = function(music_uid, title, artist_uid, artist, video_id){
-		var found = self.FindMusic(music_uid);
 
 		if(found){
-			self.RemoveMusic(music_uid);
+			if(is_multiple){
+				self.RemoveMusicMulti(music_uid);
+			}else{
+				self.RemoveMusicSingle(music_uid);
+			}
 			$('#id_btn_heart_'+music_uid).css('color', 'black');
 		}else{
 			var music = {
@@ -42,36 +38,102 @@ function FavoriteControl(){
 				title: title, 
 				artist_uid: artist_uid, 
 				artist: artist, 
-				video_id: video_id
+				video_id: video_id,
+				is_multiple: is_multiple
 			};
-			self.AddMusic(music);
+			if(is_multiple){
+				self.AddMusicMulti(music);
+			}else{
+				self.AddMusicSingle(music);
+			}
 			$('#id_btn_heart_'+music_uid).css('color', 'red');
 		}
-		self.SaveMusic();
+
+		if(is_multiple){
+			self.SaveMusicListMulti();
+		}else{
+			self.SaveMusicListSingle();
+		}
 	};
 
-	this.FindMusic = function(music_uid){
-		for(var i=0 ; i<self._music_list.length ; i++){
-			if(self._music_list[i].music_uid == music_uid){
+	//==============================================================================
+
+	this.LoadMusicSingle = function(){
+		var music_list_single = window.localStorage.getItem('FAVORITE_MUSIC_LIST_SINGLE');
+		if(music_list_single != null){
+			self._music_list_single = JSON.parse(music_list_single);
+		}
+	};
+
+	this.GetMusicListSingle = function(){
+		return self._music_list_single;
+	};
+
+	this.SaveMusicListSingle = function(){
+		window.localStorage.setItem('FAVORITE_MUSIC_LIST_SINGLE', JSON.stringify(self._music_list_single));
+	};
+
+	this.FindMusicSingle = function(music_uid){
+		for(var i=0 ; i<self._music_list_single.length ; i++){
+			if(self._music_list_single[i].music_uid == music_uid){
 				return true;
 			}
 		};
 		return false;
 	};
 
-	this.AddMusic = function(music){
-		self._music_list.push(music);
+	this.AddMusicSingle = function(music){
+		self._music_list_single.push(music);
 	};
 
-	this.RemoveMusic = function(music_uid){
-		for(var i=0 ; i<self._music_list.length ; i++){
-			if(self._music_list[i].music_uid == music_uid){
-				self._music_list.splice(i, 1);
+	this.RemoveMusicSingle = function(music_uid){
+		for(var i=0 ; i<self._music_list_single.length ; i++){
+			if(self._music_list_single[i].music_uid == music_uid){
+				self._music_list_single.splice(i, 1);
 				return true;
 			}
 		};
 	};
 
+	//==============================================================================
+
+	this.LoadMusicMulti = function(){
+		var music_list_multi = window.localStorage.getItem('FAVORITE_MUSIC_LIST_MULTI');
+		if(music_list_multi != null){
+			self._music_list_multi = JSON.parse(music_list_multi);
+		}
+	};
+
+	this.GetMusicListMulti = function(){
+		return self._music_list_multi;
+	};
+
+	this.SaveMusicListMulti = function(){
+		window.localStorage.setItem('FAVORITE_MUSIC_LIST_MULTI', JSON.stringify(self._music_list_multi));
+	};
+
+	this.FindMusicMulti = function(music_uid){
+		for(var i=0 ; i<self._music_list_multi.length ; i++){
+			if(self._music_list_multi[i].music_uid == music_uid){
+				return true;
+			}
+		};
+		return false;
+	};
+
+	this.AddMusicMulti = function(music){
+		self._music_list_multi.push(music);
+	};
+
+	this.RemoveMusicMulti = function(music_uid){
+		for(var i=0 ; i<self._music_list_multi.length ; i++){
+			if(self._music_list_multi[i].music_uid == music_uid){
+				self._music_list_multi.splice(i, 1);
+				return true;
+			}
+		};
+	};
+	
 	//=============================================================================
 
 	this.LoadArtist = function(){

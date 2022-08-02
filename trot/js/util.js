@@ -1,10 +1,17 @@
 
 function MusicItem(m){
+	console.log('m ' + JSON.stringify(m));
 	var on_click_play = `SendMusicToPlayer('${m.music_uid}', '${m.title}', '${m.artist_uid}', '${m.artist}', '${m.video_id}')`;
-	var on_click_like = `window._favorite_control.OnClickLikeMusic('${m.music_uid}', '${m.title}', '${m.artist_uid}', '${m.artist}', '${m.video_id}')`;
+	var on_click_like = `window._favorite_control.OnClickLikeMusic('${m.music_uid}', '${m.title}', '${m.artist_uid}', '${m.artist}', '${m.video_id}', ${m.is_multiple})`;
 	var heart_color = 'Black';
-	if(window._favorite_control.FindMusic(m.music_uid)){
-		heart_color = 'Red';
+	if(m.is_multiple){
+		if(window._favorite_control.FindMusicMulti(m.music_uid)){
+			heart_color = 'Red';
+		}	
+	}else{
+		if(window._favorite_control.FindMusicSingle(m.music_uid)){
+			heart_color = 'Red';
+		}
 	}
 	var h = `
 	<div class="row border-bottom px-0 py-1">
