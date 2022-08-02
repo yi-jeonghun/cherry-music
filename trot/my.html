@@ -27,7 +27,7 @@
 <body id="id_body" style="width: 100%; overflow-x: hidden; overflow-y: auto;">
 	<div class="text-center my-3 border-bottom"><h4>My</h4></div>
 
-	<ul class="nav nav-tabs">
+	<ul class="nav nav-tabs" style="margin-bottom: 10px;">
 		<li class="nav-item">
 			<a class="nav-link active" id="id_nav_multi">연속듣기</a>
 		</li>
@@ -41,6 +41,23 @@
 
 	<div class="container-fluid" id="id_div_multi_list"></div>
 	<div class="container-fluid" id="id_div_single_list" style="display: none;"></div>
-	<div class="container-fluid" id="id_div_artist_list" style="display: none;"></div>
+	<div class="container" id="id_div_artist_list" style="display: none;"></div>
 </body>
+
+<!-- 가수 노래 목록 팝업 -->
+<div class="container-fluid" id="id_div_artist_detail" style="width: 100%; height: 100%; position: fixed; left: 0px; top: 0px; z-index: 1; background-color: white; display: none;">
+	<div class="row my-3 border-bottom">
+		<div class="col-3">
+			<button type="button" class="btn btn-sm btn-primary small" onClick="window._my_control.OnClick_CloseDetail()">뒤로</button>
+		</div>
+		<div class="col-6 text-center">
+			<h4 id="id_label_artist_name">가수</h4>
+		</div>
+		<div class="col-3"></div>
+	</div>
+	<div>
+		<div id="id_div_music_list" class="container-fluid mx-0 px-0"></div>
+	</div>
+</div>
+
 </html>
