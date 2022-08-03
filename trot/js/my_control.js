@@ -15,6 +15,9 @@ function MyControl(){
 				location.reload();
 			}
 		});
+
+		$('#id_div_artist_detail').css('left', window.screen.width);
+
 		self.InitHandle();
 
 		self._single_list = window._favorite_control.GetMusicListSingle();
@@ -111,14 +114,20 @@ function MyControl(){
 	this.OnClick_ChooseArtist = function(name, artist_uid){
 		console.log('artist_uid ' + artist_uid);
 		$('#id_label_artist_name').html(name);
-		$('#id_div_artist_detail').show();
+		// $('#id_div_artist_detail').show();
+		$('#id_div_artist_detail').animate({
+			left: 0
+		});
 		$.getJSON(`db/artist/${artist_uid}.json`, function(music_list){
 			self.DISP_MusicList(music_list);
 		});
 	};
 
 	this.OnClick_CloseDetail = function(){
-		$('#id_div_artist_detail').hide();
+		// $('#id_div_artist_detail').hide();
+		$('#id_div_artist_detail').animate({
+			left: window.screen.width
+		});
 	};
 
 	this.DISP_MusicList = function(music_list){
