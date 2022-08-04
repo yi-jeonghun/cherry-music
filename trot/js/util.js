@@ -12,6 +12,12 @@ function MusicItem(m){
 			heart_color = 'Red';
 		}
 	}
+
+	var artist_name = m.artist;
+	if(m.artist_uid == '0000000000'){
+		artist_name = '';
+	}
+
 	var h = `
 	<div class="row border-bottom px-0 py-1">
 		<div class="col-3 px-0">
@@ -19,6 +25,8 @@ function MusicItem(m){
 		</div>
 		<div class="col-7 px-2">
 			${m.title}
+			<br>
+			${artist_name}
 		</div>
 		<div class="col-2 px-0 my-auto text-center">
 			<div style="margin-bottom:2px">

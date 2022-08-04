@@ -39,6 +39,10 @@ function HomeControl(){
 			}
 			var m = music_list[i];
 			var on_click_play = `SendMusicToPlayer('${m.music_uid}', '${m.title}', '${m.artist_uid}', '${m.artist}', '${m.video_id}')`;
+			var artist_name = m.artist;
+			if(m.artist_uid == '0000000000'){
+				artist_name = '';
+			}
 			h += `
 			<div style="padding: 5px;">
 				<div style="width: 200px; color: red; position:relative; cursor:pointer" onClick="${on_click_play}">
@@ -48,7 +52,7 @@ function HomeControl(){
 					</div>
 				</div>
 				<div style="margin-top: 5px">${m.title}</div>
-				<div>${m.artist}</div>
+				<div>${artist_name}</div>
 			</div>
 			`;
 		}
@@ -63,6 +67,10 @@ function HomeControl(){
 			}
 			var m = music_list[i];
 			var on_click_play = `SendMusicToPlayer('${m.music_uid}', '${m.title}', '${m.artist_uid}', '${m.artist}', '${m.video_id}')`;
+			var artist_name = m.artist;
+			if(m.artist_uid == '0000000000'){
+				artist_name = '';
+			}
 			h += `
 			<div style="padding: 5px">
 				<div style="width: 200px; color: red; position:relative; cursor:pointer" onClick="${on_click_play}">
@@ -72,7 +80,7 @@ function HomeControl(){
 					</div>
 				</div>
 				<div style="margin-top: 5px">${m.title}</div>
-				<div>${m.artist}</div>
+				<div>${artist_name}</div>
 			</div>
 			`;
 		}
