@@ -6,13 +6,7 @@ function HomeControl(){
 	var self = this;
 
 	this.Init = function(){
-		PullToRefresh.init({
-			mainElement: '#id_body',
-			onRefresh: function() {
-				location.reload();
-			}
-		});
-
+		console.log('home init ');
 		self.LoadMusicListMulti();
 		self.LoadMusicListSingle();
 
@@ -56,7 +50,7 @@ function HomeControl(){
 			</div>
 			`;
 		}
-		$('#id_div_multi_list').html(h);
+		$('#id_div_home_multi_list').html(h);
 	};
 
 	this.DISP_RecentSingle = function(music_list){
@@ -84,6 +78,6 @@ function HomeControl(){
 			</div>
 			`;
 		}
-		$('#id_div_single_list').html(h);
+		$('#id_div_home_single_list').html(h);
 	};
 }

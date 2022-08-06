@@ -7,13 +7,6 @@ function SingleControl(){
 
 	this.Init = function(){
 		self.LoadMusicList();
-
-		PullToRefresh.init({
-			mainElement: '#id_body',
-			onRefresh: function() {
-				location.reload();
-			}
-		});
 		return this;
 	};
 
@@ -23,7 +16,7 @@ function SingleControl(){
 			for(var i=0 ; i<music_list.length ; i++){
 				h += MusicItem(music_list[i]);
 			}
-			$('#id_div_list').html(h);
+			$('#id_div_single_list').html(h);
 		});
 	};
 }

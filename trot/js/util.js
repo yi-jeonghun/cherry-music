@@ -47,7 +47,7 @@ function MusicItem(m){
 
 function SendMusicToPlayer(music_uid, title, artist_uid, artist, video_id){
 	var message = {
-		head: 'mango',
+		head: 'MANGO',
 		command: 'AddMusic',
 		music: {
 			music_uid: music_uid,

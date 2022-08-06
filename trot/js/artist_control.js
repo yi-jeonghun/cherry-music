@@ -8,13 +8,6 @@ function ArtistControl(){
 	this.Init = function(){
 		self.LoadArtistList();
 
-		PullToRefresh.init({
-			mainElement: '#id_body',
-			onRefresh: function() {
-				location.reload();
-			}
-		});
-
 		$('#id_div_artist_detail').css('left', window.screen.width);
 		return this;
 	};
@@ -43,24 +36,17 @@ function ArtistControl(){
 				</div>
 				`;
 			}
-			$('#id_div_list').html(h);
+			$('#id_div_artist_list').html(h);
 		});
 	};
 
 	//==================================================================
 
 	this.OnClick_ChooseArtist = function(name, artist_uid){
-		console.log('artist_uid ' + artist_uid);
-		$('#id_label_artist_name').html(name);
-		// $('#id_div_artist_detail').show();
-		$('#id_div_artist_detail').animate({
+		$('#id_label_artist_artist_name').html(name);
+		$('#id_div_artist_artist_detail').animate({
 			left: 0
 		});
-
-		// $("#id_player_music_list_div").animate({
-		// 	top: 0
-    // });
-
 
 		$.getJSON(`db/artist/${artist_uid}.json`, function(music_list){
 			self.DISP_MusicList(music_list);
@@ -68,8 +54,7 @@ function ArtistControl(){
 	};
 
 	this.OnClick_CloseDetail = function(){
-		// $('#id_div_artist_detail').hide();
-		$('#id_div_artist_detail').animate({
+		$('#id_div_artist_artist_detail').animate({
 			left: window.screen.width
 		});
 	};
@@ -79,6 +64,6 @@ function ArtistControl(){
 		for(var i=0 ; i<music_list.length ; i++){
 			h += MusicItem(music_list[i]);
 		}
-		$('#id_div_music_list').html(h);
+		$('#id_div_artist_music_list').html(h);
 	};
 }

@@ -9,13 +9,6 @@ function MyControl(){
 	this._artist_list = [];
 
 	this.Init = function(){
-		PullToRefresh.init({
-			mainElement: '#id_body',
-			onRefresh: function() {
-				location.reload();
-			}
-		});
-
 		$('#id_div_artist_detail').css('left', window.screen.width);
 
 		self.InitHandle();
@@ -50,22 +43,22 @@ function MyControl(){
 		$('#id_nav_single').removeClass('active');
 		$('#id_nav_artist').removeClass('active');
 
-		$('#id_div_multi_list').hide();
-		$('#id_div_single_list').hide();
-		$('#id_div_artist_list').hide();
+		$('#id_div_my_multi_list').hide();
+		$('#id_div_my_single_list').hide();
+		$('#id_div_my_artist_list').hide();
 
 		switch(tab){
 			case 'multi':
 				$('#id_nav_multi').addClass('active');
-				$('#id_div_multi_list').show();
+				$('#id_div_my_multi_list').show();
 				break;
 			case 'single':
 				$('#id_nav_single').addClass('active');
-				$('#id_div_single_list').show();
+				$('#id_div_my_single_list').show();
 				break;
 			case 'artist':
 				$('#id_nav_artist').addClass('active');
-				$('#id_div_artist_list').show();
+				$('#id_div_my_artist_list').show();
 				break;
 		}
 	};
@@ -75,14 +68,14 @@ function MyControl(){
 		for(var i=0 ; i<self._multi_list.length ; i++){
 			h += MusicItem(self._multi_list[i]);
 		}
-		$('#id_div_multi_list').html(h);
+		$('#id_div_my_multi_list').html(h);
 	};
 	this.DISP_SingleList = function(){
 		var h = '';
 		for(var i=0 ; i<self._single_list.length ; i++){
 			h += MusicItem(self._single_list[i]);
 		}
-		$('#id_div_single_list').html(h);
+		$('#id_div_my_single_list').html(h);
 	};
 	this.DISP_ArtistList = function(){
 		var h = '';
@@ -107,15 +100,13 @@ function MyControl(){
 			</div>
 			`;
 		}
-		$('#id_div_artist_list').html(h);
+		$('#id_div_my_artist_list').html(h);
 	};
 
 	//==================================================================
 	this.OnClick_ChooseArtist = function(name, artist_uid){
-		console.log('artist_uid ' + artist_uid);
-		$('#id_label_artist_name').html(name);
-		// $('#id_div_artist_detail').show();
-		$('#id_div_artist_detail').animate({
+		$('#id_label_my_artist_name').html(name);
+		$('#id_div_my_artist_detail').animate({
 			left: 0
 		});
 		$.getJSON(`db/artist/${artist_uid}.json`, function(music_list){
@@ -124,8 +115,7 @@ function MyControl(){
 	};
 
 	this.OnClick_CloseDetail = function(){
-		// $('#id_div_artist_detail').hide();
-		$('#id_div_artist_detail').animate({
+		$('#id_div_my_artist_detail').animate({
 			left: window.screen.width
 		});
 	};
@@ -135,6 +125,6 @@ function MyControl(){
 		for(var i=0 ; i<music_list.length ; i++){
 			h += MusicItem(music_list[i]);
 		}
-		$('#id_div_music_list').html(h);
+		$('#id_div_my_music_list').html(h);
 	};
 }
