@@ -1,14 +1,14 @@
 
 function MusicItem(m){
-	var on_click_play = `SendMusicToPlayer('${m.music_uid}', '${m.title}', '${m.artist_uid}', '${m.artist}', '${m.video_id}')`;
-	var on_click_like = `window._favorite_control.OnClickLikeMusic('${m.music_uid}', '${m.title}', '${m.artist_uid}', '${m.artist}', '${m.video_id}', ${m.is_multiple})`;
+	var on_click_play = `SendMusicToPlayer('${m.music_uid}', '${m.title}', '${m.artist_uid}', '${m.artist}', '${m.video_id}', ${m.is_multiple})`;
+	var on_click_like = `window._like_control.OnClickLikeMusic('${m.music_uid}', '${m.title}', '${m.artist_uid}', '${m.artist}', '${m.video_id}', ${m.is_multiple})`;
 	var heart_color = 'Black';
 	if(m.is_multiple){
-		if(window._favorite_control.FindMusicMulti(m.music_uid)){
+		if(window._like_control.FindMusicMulti(m.music_uid)){
 			heart_color = 'Red';
 		}	
 	}else{
-		if(window._favorite_control.FindMusicSingle(m.music_uid)){
+		if(window._like_control.FindMusicSingle(m.music_uid)){
 			heart_color = 'Red';
 		}
 	}
@@ -45,7 +45,7 @@ function MusicItem(m){
 	return h;
 }
 
-function SendMusicToPlayer(music_uid, title, artist_uid, artist, video_id){
+function SendMusicToPlayer(music_uid, title, artist_uid, artist, video_id, is_multiple){
 	var message = {
 		head: 'MANGO',
 		command: 'AddMusic',
@@ -55,6 +55,7 @@ function SendMusicToPlayer(music_uid, title, artist_uid, artist, video_id){
 			artist_uid: artist_uid,
 			artist: artist,
 			video_id: video_id,
+			is_multiple: is_multiple
 		}
 	};
 	parent.postMessage(message, "*");

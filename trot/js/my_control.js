@@ -13,9 +13,9 @@ function MyControl(){
 
 		self.InitHandle();
 
-		self._single_list = window._favorite_control.GetMusicListSingle();
-		self._multi_list = window._favorite_control.GetMusicListMulti();
-		self._artist_list = window._favorite_control.GetArtistList();
+		self._single_list = window._like_control.GetMusicListSingle();
+		self._multi_list = window._like_control.GetMusicListMulti();
+		self._artist_list = window._like_control.GetArtistList();
 
 		self.DISP_MultiList();
 		self.DISP_SingleList();
@@ -82,11 +82,11 @@ function MyControl(){
 		for(var i=0 ; i<self._artist_list.length ; i++){
 			var a = self._artist_list[i];
 			var heart_color = 'Black';
-			if(window._favorite_control.FindArtist(a.artist_uid)){
+			if(window._like_control.FindArtist(a.artist_uid)){
 				heart_color = 'Red';
 			}
 			var on_click_artist = `window._my_control.OnClick_ChooseArtist('${a.name}', '${a.artist_uid}')`;
-			var on_click_like = `window._favorite_control.OnClickLikeArtist('${a.artist_uid}', '${a.name}')`;
+			var on_click_like = `window._like_control.OnClickLikeArtist('${a.artist_uid}', '${a.name}')`;
 			h += `
 			<div class="row border-bottom py-1">
 				<div class="col-10 my-auto" style="cursor:pointer" onClick="${on_click_artist}">

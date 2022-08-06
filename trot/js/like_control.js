@@ -1,8 +1,8 @@
 $('document').ready(function(){
-	window._favorite_control = new FavoriteControl().Init();
+	window._like_control = new LikeControl().Init();
 });
 
-function FavoriteControl(){
+function LikeControl(){
 	var self = this;
 	this._music_list_single = [];
 	this._music_list_multi = [];
@@ -25,12 +25,20 @@ function FavoriteControl(){
 			found = self.FindMusicSingle(music_uid);			
 		}
 
+		var message = {
+			head: 'MANGO',
+			command: 'ClickLikeMusicResponse',
+			music_uid: music_uid,
+			result: ''
+		};
+
 		if(found){
 			if(is_multiple){
 				self.RemoveMusicMulti(music_uid);
 			}else{
 				self.RemoveMusicSingle(music_uid);
 			}
+			message.result = 'deleted';
 			$('#id_btn_heart_'+music_uid).css('color', 'black');
 		}else{
 			var music = {
@@ -46,8 +54,11 @@ function FavoriteControl(){
 			}else{
 				self.AddMusicSingle(music);
 			}
+			message.result = 'added';
 			$('#id_btn_heart_'+music_uid).css('color', 'red');
 		}
+
+		parent.postMessage(message, "*");
 
 		if(is_multiple){
 			self.SaveMusicListMulti();
@@ -59,7 +70,7 @@ function FavoriteControl(){
 	//==============================================================================
 
 	this.LoadMusicSingle = function(){
-		var music_list_single = window.localStorage.getItem('FAVORITE_MUSIC_LIST_SINGLE');
+		var music_list_single = window.localStorage.getItem('LIKE_MUSIC_LIST_SINGLE');
 		if(music_list_single != null){
 			self._music_list_single = JSON.parse(music_list_single);
 		}
@@ -70,7 +81,7 @@ function FavoriteControl(){
 	};
 
 	this.SaveMusicListSingle = function(){
-		window.localStorage.setItem('FAVORITE_MUSIC_LIST_SINGLE', JSON.stringify(self._music_list_single));
+		window.localStorage.setItem('LIKE_MUSIC_LIST_SINGLE', JSON.stringify(self._music_list_single));
 	};
 
 	this.FindMusicSingle = function(music_uid){
@@ -98,7 +109,7 @@ function FavoriteControl(){
 	//==============================================================================
 
 	this.LoadMusicMulti = function(){
-		var music_list_multi = window.localStorage.getItem('FAVORITE_MUSIC_LIST_MULTI');
+		var music_list_multi = window.localStorage.getItem('LIKE_MUSIC_LIST_MULTI');
 		if(music_list_multi != null){
 			self._music_list_multi = JSON.parse(music_list_multi);
 		}
@@ -109,11 +120,13 @@ function FavoriteControl(){
 	};
 
 	this.SaveMusicListMulti = function(){
-		window.localStorage.setItem('FAVORITE_MUSIC_LIST_MULTI', JSON.stringify(self._music_list_multi));
+		window.localStorage.setItem('LIKE_MUSIC_LIST_MULTI', JSON.stringify(self._music_list_multi));
 	};
 
 	this.FindMusicMulti = function(music_uid){
+		console.log('find music multi ' + music_uid);
 		for(var i=0 ; i<self._music_list_multi.length ; i++){
+			console.log(i + ' ' + self._music_list_multi[i].music_uid);
 			if(self._music_list_multi[i].music_uid == music_uid){
 				return true;
 			}
@@ -137,7 +150,7 @@ function FavoriteControl(){
 	//=============================================================================
 
 	this.LoadArtist = function(){
-		var artist_list = window.localStorage.getItem('FAVORITE_ARTIST_LIST');
+		var artist_list = window.localStorage.getItem('LIKE_ARTIST_LIST');
 		if(artist_list != null){
 			self._artist_list = JSON.parse(artist_list);
 		}
@@ -148,7 +161,7 @@ function FavoriteControl(){
 	};
 
 	this.SaveArtist = function(){
-		window.localStorage.setItem('FAVORITE_ARTIST_LIST', JSON.stringify(self._artist_list));
+		window.localStorage.setItem('LIKE_ARTIST_LIST', JSON.stringify(self._artist_list));
 	};
 
 	this.OnClickLikeArtist = function(artist_uid, name){

@@ -18,11 +18,11 @@ function ArtistControl(){
 			for(var i=0 ; i<artist_list.length ; i++){
 				var a = artist_list[i];
 				var heart_color = 'Black';
-				if(window._favorite_control.FindArtist(a.artist_uid)){
+				if(window_like_control.FindArtist(a.artist_uid)){
 					heart_color = 'Red';
 				}			
 				var on_click_artist = `window._artist_control.OnClick_ChooseArtist('${a.name}', '${a.artist_uid}')`;
-				var on_click_like = `window._favorite_control.OnClickLikeArtist('${a.artist_uid}', '${a.name}')`;
+				var on_click_like = `window._like_control.OnClickLikeArtist('${a.artist_uid}', '${a.name}')`;
 				h += `
 				<div class="row border-bottom py-1">
 					<div class="col-10 my-auto" style="cursor:pointer" onClick="${on_click_artist}">

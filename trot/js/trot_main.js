@@ -18,7 +18,7 @@ function TrotMain(){
 
 	this.InitMessageHandler = function(){
 		window.addEventListener("message", (event) => {
-			console.log('evnet ' + event);
+			// console.log('evnet ' + event);
 			var message = event.data;
 			if(message.head == 'undefined'){
 				return;
@@ -26,22 +26,25 @@ function TrotMain(){
 				if(message.command == 'ChangeMenu'){
 					console.log('message.menu ' + message.menu);
 					self.OpenMenu(message.menu);
-				}else if(message.command == 'FindFavoriteMusic'){
-					console.log('FindFavoriteMusic ');
-					console.log('message.music_list.length ' + message.music_list.length);
+				}else if(message.command == 'FindLikeMusic'){
 					for(var i=0 ; i<message.music_list.length ; i++){
-						if(message.music_list[i].is_multiple){
-							message.music_list[i].is_favorite = window._favorite_control.FindMusicMulti(message.music_list[i].music_uid);
+						var m = message.music_list[i];
+						console.log(m.title);
+						if(m.is_multiple){
+							m.is_like = window._like_control.FindMusicMulti(m.music_uid);
 						}else{
-							message.music_list[i].is_favorite = window._favorite_control.FindMusicSingle(message.music_list[i].music_uid);
+							m.is_like = window._like_control.FindMusicSingle(m.music_uid);
 						}
 					}
 					var message = {
 						head: 'MANGO',
-						command: 'FindFavoriteMusicResponse',
+						command: 'FindLikeMusicResponse',
 						music_list: message.music_list
 					};
-					parent.postMessage(message, "*");				
+					parent.postMessage(message, "*");
+				}else if(message.command == 'ClickLikeMusic'){
+					var m = message.music;
+					window._like_control.OnClickLikeMusic(m.music_uid, m.title, m.artist_uid, m.artist, m.video_id, m.is_multiple);
 				}
 			}
 		}, false);
