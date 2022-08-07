@@ -1,7 +1,5 @@
 
 function MusicItem(control, index, music, sub_type){
-	music.title = EscapeHtml(music.title);
-
 	var on_click_play = `${control}.SendMusicToPlayer(${index}, '${sub_type}')`;
 	var on_click_like = `${control}.LikeMusic(${index}, '${sub_type}')`;
 
@@ -27,7 +25,7 @@ function MusicItem(control, index, music, sub_type){
 			<img style="width: 100%; height: auto;" src="https://img.youtube.com/vi/${music.video_id}/0.jpg">
 		</div>
 		<div class="col-7 px-2">
-			${music.title}
+			${EscapeHtml(music.title)}
 			<br>
 			${artist_name}
 		</div>
