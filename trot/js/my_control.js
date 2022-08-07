@@ -7,6 +7,7 @@ function MyControl(){
 	this._single_list = [];
 	this._multi_list = [];
 	this._artist_list = [];
+	this._artist_music_list = [];
 
 	this.Init = function(){
 		$('#id_div_artist_detail').css('left', window.screen.width);
@@ -66,14 +67,14 @@ function MyControl(){
 	this.DISP_MultiList = function(){
 		var h = '';
 		for(var i=0 ; i<self._multi_list.length ; i++){
-			h += MusicItem(self._multi_list[i]);
+			h += MusicItem('window._my_control', i, self._multi_list[i], 'multi');
 		}
 		$('#id_div_my_multi_list').html(h);
 	};
 	this.DISP_SingleList = function(){
 		var h = '';
 		for(var i=0 ; i<self._single_list.length ; i++){
-			h += MusicItem(self._single_list[i]);
+			h += MusicItem('window._my_control', i, self._single_list[i], 'single');
 		}
 		$('#id_div_my_single_list').html(h);
 	};
@@ -110,7 +111,8 @@ function MyControl(){
 			left: 0
 		});
 		$.getJSON(`db/artist/${artist_uid}.json`, function(music_list){
-			self.DISP_MusicList(music_list);
+			self._artist_music_list = music_list;
+			self.DISP_ArtistMusicList();
 		});
 	};
 
@@ -120,11 +122,33 @@ function MyControl(){
 		});
 	};
 
-	this.DISP_MusicList = function(music_list){
+	this.DISP_ArtistMusicList = function(){
 		var h = ``;
-		for(var i=0 ; i<music_list.length ; i++){
-			h += MusicItem(music_list[i]);
+		for(var i=0 ; i<self._artist_music_list.length ; i++){
+			h += MusicItem('window._my_control', i, self._artist_music_list[i], 'artist');
 		}
 		$('#id_div_my_music_list').html(h);
+	};
+
+	//==================================================================
+
+	this.SendMusicToPlayer = function(index, sub_type){
+		if(sub_type == 'multi'){
+			SendMessage_AddMusic(self._multi_list[index]);
+		}else if(sub_type == 'single'){
+			SendMessage_AddMusic(self._single_list[index]);
+		}else if(sub_type == 'artist'){
+			SendMessage_AddMusic(self._artist_music_list[index]);
+		}
+	};
+
+	this.LikeMusic = function(index, sub_type){
+		if(sub_type == 'multi'){
+			window._like_control.OnClickLikeMusic(self._multi_list[index]);
+		}else if(sub_type == 'single'){
+			window._like_control.OnClickLikeMusic(self._single_list[index]);
+		}else if(sub_type == 'artist'){
+			window._like_control.OnClickLikeMusic(self._artist_music_list[index]);
+		}
 	};
 }

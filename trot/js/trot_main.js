@@ -43,8 +43,7 @@ function TrotMain(){
 					};
 					parent.postMessage(message, "*");
 				}else if(message.command == 'ClickLikeMusic'){
-					var m = message.music;
-					window._like_control.OnClickLikeMusic(m.music_uid, m.title, m.artist_uid, m.artist, m.video_id, m.is_multiple);
+					window._like_control.OnClickLikeMusic(message.music);
 				}
 			}
 		}, false);

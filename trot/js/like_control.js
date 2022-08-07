@@ -17,50 +17,42 @@ function LikeControl(){
 
 	//==============================================================================
 
-	this.OnClickLikeMusic = function(music_uid, title, artist_uid, artist, video_id, is_multiple){
+	this.OnClickLikeMusic = function(music){
 		var found = false;
-		if(is_multiple){
-			found = self.FindMusicMulti(music_uid);
+		if(music.is_multiple){
+			found = self.FindMusicMulti(music.music_uid);
 		}else{
-			found = self.FindMusicSingle(music_uid);			
+			found = self.FindMusicSingle(music.music_uid);			
 		}
 
 		var message = {
 			head: 'MANGO',
 			command: 'ClickLikeMusicResponse',
-			music_uid: music_uid,
+			music_uid: music.music_uid,
 			result: ''
 		};
 
 		if(found){
-			if(is_multiple){
-				self.RemoveMusicMulti(music_uid);
+			if(music.is_multiple){
+				self.RemoveMusicMulti(music.music_uid);
 			}else{
-				self.RemoveMusicSingle(music_uid);
+				self.RemoveMusicSingle(music.music_uid);
 			}
 			message.result = 'deleted';
-			$('#id_btn_heart_'+music_uid).css('color', 'black');
+			$('#id_btn_heart_' + music.music_uid).css('color', 'black');
 		}else{
-			var music = {
-				music_uid: music_uid, 
-				title: title, 
-				artist_uid: artist_uid, 
-				artist: artist, 
-				video_id: video_id,
-				is_multiple: is_multiple
-			};
-			if(is_multiple){
+			if(music.is_multiple){
 				self.AddMusicMulti(music);
 			}else{
 				self.AddMusicSingle(music);
 			}
 			message.result = 'added';
-			$('#id_btn_heart_'+music_uid).css('color', 'red');
+			$('#id_btn_heart_' + music.music_uid).css('color', 'red');
 		}
 
 		parent.postMessage(message, "*");
 
-		if(is_multiple){
+		if(music.is_multiple){
 			self.SaveMusicListMulti();
 		}else{
 			self.SaveMusicListSingle();

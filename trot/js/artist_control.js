@@ -4,6 +4,7 @@ $('document').ready(function(){
 
 function ArtistControl(){
 	var self = this;
+	this._music_list = [];
 
 	this.Init = function(){
 		self.LoadArtistList();
@@ -18,7 +19,7 @@ function ArtistControl(){
 			for(var i=0 ; i<artist_list.length ; i++){
 				var a = artist_list[i];
 				var heart_color = 'Black';
-				if(window_like_control.FindArtist(a.artist_uid)){
+				if(window._like_control.FindArtist(a.artist_uid)){
 					heart_color = 'Red';
 				}			
 				var on_click_artist = `window._artist_control.OnClick_ChooseArtist('${a.name}', '${a.artist_uid}')`;
@@ -49,7 +50,8 @@ function ArtistControl(){
 		});
 
 		$.getJSON(`db/artist/${artist_uid}.json`, function(music_list){
-			self.DISP_MusicList(music_list);
+			self._music_list = music_list;
+			self.DISP_MusicList();
 		});
 	};
 
@@ -59,11 +61,21 @@ function ArtistControl(){
 		});
 	};
 
-	this.DISP_MusicList = function(music_list){
+	this.DISP_MusicList = function(){
+		var control = 'window._artist_control';
 		var h = ``;
-		for(var i=0 ; i<music_list.length ; i++){
-			h += MusicItem(music_list[i]);
+		for(var i=0 ; i<self._music_list.length ; i++){			
+			var music = self._music_list[i];
+			h += MusicItem(control, i, music);
 		}
 		$('#id_div_artist_music_list').html(h);
+	};
+
+	this.SendMusicToPlayer = function(index){
+		SendMessage_AddMusic(self._music_list[index]);
+	};
+
+	this.LikeMusic = function(index){
+		window._like_control.OnClickLikeMusic(self._music_list[index]);
 	};
 }
