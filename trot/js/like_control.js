@@ -39,7 +39,7 @@ function LikeControl(){
 				self.RemoveMusicSingle(music.music_uid);
 			}
 			message.result = 'deleted';
-			$('#id_btn_heart_' + music.music_uid).css('color', 'black');
+			self.Color(music.music_uid, 'black');
 		}else{
 			if(music.is_multiple){
 				self.AddMusicMulti(music);
@@ -47,7 +47,7 @@ function LikeControl(){
 				self.AddMusicSingle(music);
 			}
 			message.result = 'added';
-			$('#id_btn_heart_' + music.music_uid).css('color', 'red');
+			self.Color(music.music_uid, 'red');
 		}
 
 		parent.postMessage(message, "*");
@@ -57,6 +57,11 @@ function LikeControl(){
 		}else{
 			self.SaveMusicListSingle();
 		}
+	};
+
+	this.Color = function(music_uid, color){
+		var id = `id_btn_heart_${music_uid}`;
+		$(`[id='${id}']`).css('color', color);
 	};
 
 	//==============================================================================
