@@ -37,16 +37,19 @@ function HomeControl(){
 			if(m.artist_uid == '0000000000'){
 				artist_name = '';
 			}
+
 			h += `
-			<div style="padding: 5px;">
+			<div style="padding: 5px; width:215px;" class="">
 				<div style="width: 200px; color: red; position:relative; cursor:pointer" onClick="${on_click_play}">
 					<img style="width: 100%; height: auto;" src="https://img.youtube.com/vi/${m.video_id}/0.jpg">
 					<div style="position: absolute; left:90px; top:60px">
 						<i id="id_btn_play_pause" class="fas fa-play" style="color:red; font-size: 2.5em;"></i>
 					</div>
 				</div>
-				<div style="margin-top: 5px">${m.title}</div>
-				<div>${artist_name}</div>
+				<div>
+					<div style="margin-top: 5px; width:200px; height:100px;">${m.title}</div>
+					<div>${artist_name}</div>
+				</div>
 			</div>
 			`;
 		}
@@ -66,14 +69,14 @@ function HomeControl(){
 				artist_name = '';
 			}
 			h += `
-			<div style="padding: 5px">
+			<div style="padding: 5px; width:215px;">
 				<div style="width: 200px; color: red; position:relative; cursor:pointer" onClick="${on_click_play}">
 					<img style="width: 100%; height: auto;" src="https://img.youtube.com/vi/${m.video_id}/0.jpg">
 					<div style="position: absolute; left:90px; top:60px">
 						<i id="id_btn_play_pause" class="fas fa-play" style="color:red; font-size: 2.5em;"></i>
 					</div>
 				</div>
-				<div style="margin-top: 5px">${m.title}</div>
+				<div style="margin-top: 5px; width:200px; height:100px;">${m.title}</div>
 				<div>${artist_name}</div>
 			</div>
 			`;
