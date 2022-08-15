@@ -44,6 +44,8 @@ function TrotMain(){
 					parent.postMessage(message, "*");
 				}else if(message.command == 'ClickLikeMusic'){
 					window._like_control.OnClickLikeMusic(message.music);
+				}else if(message.command == 'GetAppVersionResponse'){
+					$('#id_label_app_version').html(message.app_version);
 				}
 			}
 		}, false);

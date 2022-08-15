@@ -9,6 +9,7 @@ function HomeControl(){
 		console.log('home init ');
 		self.LoadMusicListMulti();
 		self.LoadMusicListSingle();
+		SendMessage_GetAppVersion();
 
 		return this;
 	};

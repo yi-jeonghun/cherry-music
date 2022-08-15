@@ -55,6 +55,14 @@ function SendMessage_AddMusic(music){
 	parent.postMessage(message, "*");
 }
 
+function SendMessage_GetAppVersion(){
+	var message = {
+		head: 'MANGO',
+		command: 'GetAppVersion'
+	};
+	parent.postMessage(message, "*");
+};
+
 function EscapeHtml(unsafe){
 	return unsafe
 				.replace(/&/g, "&amp;")
