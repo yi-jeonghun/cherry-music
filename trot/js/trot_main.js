@@ -109,7 +109,8 @@ function TrotMain(){
 	};
 
 	this.InitPullToRequest = function(div_name, menu){
-		console.log('init pull refresh ' + div_name + ' ' + menu);
+		// console.log('init pull refresh ' + div_name + ' ' + menu);
+		return;
 
 		PullToRefresh.init({
 			mainElement: '#id_menu_home',
