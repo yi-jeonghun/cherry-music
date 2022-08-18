@@ -24,6 +24,28 @@ function MultiControl(){
 		});
 	};
 
+	this._opend_index_list = [];
+	this.ShowMultiMusicList = function(idx){
+		console.log('ShowMultiMusicList ');
+		console.log('self._opend_index_list[idx] ' + self._opend_index_list[idx]);
+
+		if(self._opend_index_list[idx] == undefined || self._opend_index_list[idx] == false){
+			self._opend_index_list[idx] = true;
+			var list = self._music_list[idx].multi_music_list;
+			list = list.replaceAll("\n", "<br>");
+			$('#id_div_multi_'+idx).removeClass("d-none");
+			$('#id_div_multi_'+idx).html(list);
+			$('#id_icon_multi_'+idx).removeClass("fa-angle-down");
+			$('#id_icon_multi_'+idx).addClass("fa-angle-up");
+		}else if(self._opend_index_list[idx] == true){
+			self._opend_index_list[idx] = false;
+			$('#id_div_multi_'+idx).addClass("d-none");
+			$('#id_div_multi_'+idx).html('');
+			$('#id_icon_multi_'+idx).addClass("fa-angle-down");
+			$('#id_icon_multi_'+idx).removeClass("fa-angle-up");
+		}
+	};
+
 	this.SendMusicToPlayer = function(index){
 		SendMessage_AddMusic(self._music_list[index]);
 	};

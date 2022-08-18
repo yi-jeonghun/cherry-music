@@ -19,15 +19,24 @@ function MusicItem(control, index, music, sub_type){
 		artist_name = '';
 	}
 
+	var more_icon = '';
+	var on_click_more = '';
+	if(music.multi_music_list != null && music.multi_music_list != ''){
+		more_icon = `<i id="id_icon_multi_${index}" class="fas fa-angle-down"></i>`;
+		on_click_more = `${control}.ShowMultiMusicList(${index})`;
+	}
+
 	var h = `
 	<div class="row border-bottom px-0 py-1">
 		<div class="col-3 px-0">
 			<img style="width: 100%; height: auto;" src="https://img.youtube.com/vi/${music.video_id}/0.jpg">
 		</div>
-		<div class="col-7 px-2">
-			${EscapeHtml(music.title)}
-			<br>
-			${artist_name}
+		<div class="col-7 px-2" onClick="${on_click_more}">
+			<div>${EscapeHtml(music.title)}</div>
+			<div>${artist_name}</div>
+			<div class="text-center" style="width:100%">
+				${more_icon}
+			</div>
 		</div>
 		<div class="col-2 px-0 my-auto text-center">
 			<div style="margin-bottom:2px">
@@ -42,7 +51,9 @@ function MusicItem(control, index, music, sub_type){
 			</div>
 		</div>
 	</div>
+	<div id="id_div_multi_${index}" class="d-none border-bottom"></div>
 	`;
+
 	return h;
 }
 

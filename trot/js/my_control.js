@@ -64,6 +64,25 @@ function MyControl(){
 		}
 	};
 
+	this._opend_index_list = [];
+	this.ShowMultiMusicList = function(idx){
+		if(self._opend_index_list[idx] == undefined || self._opend_index_list[idx] == false){
+			self._opend_index_list[idx] = true;
+			var list = self._multi_list[idx].multi_music_list;
+			list = list.replaceAll("\n", "<br>");
+			$('#id_div_multi_'+idx).removeClass("d-none");
+			$('#id_div_multi_'+idx).html(list);
+			$('#id_icon_multi_'+idx).removeClass("fa-angle-down");
+			$('#id_icon_multi_'+idx).addClass("fa-angle-up");
+		}else if(self._opend_index_list[idx] == true){
+			self._opend_index_list[idx] = false;
+			$('#id_div_multi_'+idx).addClass("d-none");
+			$('#id_div_multi_'+idx).html('');
+			$('#id_icon_multi_'+idx).addClass("fa-angle-down");
+			$('#id_icon_multi_'+idx).removeClass("fa-angle-up");
+		}
+	};
+
 	this.DISP_MultiList = function(){
 		var h = '';
 		for(var i=0 ; i<self._multi_list.length ; i++){
