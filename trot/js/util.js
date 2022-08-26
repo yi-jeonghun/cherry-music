@@ -66,6 +66,15 @@ function SendMessage_AddMusic(music){
 	parent.postMessage(message, "*");
 }
 
+function SendMessage_ListenAll(music_list){
+	var message = {
+		head: 'MANGO',
+		command: 'ListenAll',
+		music_list: music_list
+	};
+	parent.postMessage(message, "*");
+}
+
 function SendMessage_GetAppVersion(){
 	var message = {
 		head: 'MANGO',

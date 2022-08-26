@@ -7,7 +7,7 @@ function TrotMain(){
 
 	this.Init = function(){	
 		self.InitHandle();
-		self.OpenMenu('home');
+		self.OpenMenu('top100');
 		self.InitMessageHandler();
 		self.InitPullToRequest();
 		return this;
@@ -52,12 +52,14 @@ function TrotMain(){
 	};
 
 	//-------------------------------------------------------------
+	this._menu_loaded_top100 = false;
 	this._menu_loaded_home = false;
 	this._menu_loaded_artist = false;
 	this._menu_loaded_multi = false;
 	this._menu_loaded_single = false;
 	this._menu_loaded_my = false;
 	this.OpenMenu = function(menu, reload){
+		$('#id_menu_top100').hide();
 		$('#id_menu_home').hide();
 		$('#id_menu_artist').hide();
 		$('#id_menu_multi').hide();
@@ -69,6 +71,13 @@ function TrotMain(){
 		}
 
 		switch(menu){
+			case 'top100':
+				$('#id_menu_top100').show();
+				if(self._menu_loaded_top100 == false | reload){
+					$('#id_menu_top100').load(`./top100.html`);
+					self._menu_loaded_top100 = true;
+				}
+				break;
 			case 'home':
 				$('#id_menu_home').show();
 				if(self._menu_loaded_home == false | reload){
