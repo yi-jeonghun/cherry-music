@@ -29,7 +29,7 @@ function TrotMain(){
 				}else if(message.command == 'FindLikeMusic'){
 					for(var i=0 ; i<message.music_list.length ; i++){
 						var m = message.music_list[i];
-						console.log(m.title);
+						// console.log(m.title);
 						if(m.is_multiple){
 							m.is_like = window._like_control.FindMusicMulti(m.music_uid);
 						}else{
