@@ -78,4 +78,8 @@ function ArtistControl(){
 	this.LikeMusic = function(index){
 		window._like_control.OnClickLikeMusic(self._music_list[index]);
 	};
+
+	this.ListenAll = function(){
+		SendMessage_ListenAll(self._music_list);
+	};
 }
