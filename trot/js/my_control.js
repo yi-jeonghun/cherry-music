@@ -170,4 +170,10 @@ function MyControl(){
 			window._like_control.OnClickLikeMusic(self._artist_music_list[index]);
 		}
 	};
+
+	this.ListenAll = function(sub_type){
+		if(sub_type == 'artist'){
+			SendMessage_ListenAll(self._artist_music_list);
+		}
+	};
 }
