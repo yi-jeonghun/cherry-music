@@ -67,7 +67,7 @@ function MyControl(){
 
 	this._opend_index_list = [];
 	this.ShowMultiMusicList = function(idx){
-		var music = self._music_list[idx];
+		var music = self._multi_list[idx];
 		var music_uid = music.music_uid;
 
 		if(self._opend_index_list[idx] == undefined || self._opend_index_list[idx] == false){
