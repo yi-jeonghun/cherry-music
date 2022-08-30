@@ -59,6 +59,8 @@ function TrotMain(){
 	this._menu_loaded_single = false;
 	this._menu_loaded_my = false;
 	this._menu_loaded_tv_show = false;
+	this._menu_loaded_pops = false;
+	
 	this.OpenMenu = function(menu, reload){
 		console.log('menu ' + menu);
 		$('#id_menu_top100').hide();
@@ -68,6 +70,7 @@ function TrotMain(){
 		$('#id_menu_single').hide();
 		$('#id_menu_my').hide();
 		$('#id_menu_tv_show').hide();
+		$('#id_menu_pops').hide();
 
 		if(window._mango_player != null){
 			window._mango_player.PlayList_Hide();
@@ -122,6 +125,13 @@ function TrotMain(){
 				if(self._menu_loaded_tv_show == false | reload){
 					$('#id_menu_tv_show').load(`./tv_show.html`);
 					self._menu_loaded_tv_show = true;
+				}
+			break;
+			case 'pops':
+				$('#id_menu_pops').show();
+				if(self._menu_loaded_pops == false | reload){
+					$('#id_menu_pops').load(`./pops.html`);
+					self._menu_loaded_pops = true;
 				}
 			break;
 
