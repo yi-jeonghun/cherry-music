@@ -4,6 +4,7 @@ $('document').ready(function(){
 
 function SingleControl(){
 	var self = this;
+	this.PREFIX = 'SingleControl';
 	this._music_list = [];
 
 	this.Init = function(){
@@ -18,7 +19,7 @@ function SingleControl(){
 			var h = ``;
 			for(var i=0 ; i<self._music_list.length ; i++){
 				var music = self._music_list[i];
-				h += MusicItem(control, i, music);
+				h += MusicItem(self.PREFIX, control, i, music);
 			}
 			$('#id_div_single_list').html(h);
 		});

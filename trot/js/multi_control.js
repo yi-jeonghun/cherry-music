@@ -4,6 +4,7 @@ $('document').ready(function(){
 
 function MultiControl(){
 	var self = this;
+	this.PREFIX = 'MultiControl';
 	this._music_list = [];
 
 	this.Init = function(){
@@ -18,7 +19,7 @@ function MultiControl(){
 			var h = ``;
 			for(var i=0 ; i<music_list.length ; i++){
 				var music = self._music_list[i];
-				h += MusicItem(control, i, music);
+				h += MusicItem(self.PREFIX, control, i, music);
 			}
 			$('#id_div_multi_list').html(h);
 		});
@@ -26,23 +27,23 @@ function MultiControl(){
 
 	this._opend_index_list = [];
 	this.ShowMultiMusicList = function(idx){
-		console.log('ShowMultiMusicList ');
-		console.log('self._opend_index_list[idx] ' + self._opend_index_list[idx]);
+		var music = self._music_list[idx];
+		var music_uid = music.music_uid;
 
 		if(self._opend_index_list[idx] == undefined || self._opend_index_list[idx] == false){
 			self._opend_index_list[idx] = true;
-			var list = self._music_list[idx].multi_music_list;
+			var list = music.multi_music_list;
 			list = list.replaceAll("\n", "<br>");
-			$('#id_div_multi_'+idx).removeClass("d-none");
-			$('#id_div_multi_'+idx).html(list);
-			$('#id_icon_multi_'+idx).removeClass("fa-angle-down");
-			$('#id_icon_multi_'+idx).addClass("fa-angle-up");
+			$(`#id_div_multi_${self.PREFIX}_${music_uid}`).removeClass("d-none");
+			$(`#id_div_multi_${self.PREFIX}_${music_uid}`).html(list);
+			$(`#id_icon_multi_${self.PREFIX}_${music_uid}`).removeClass("fa-angle-down");
+			$(`#id_icon_multi_${self.PREFIX}_${music_uid}`).addClass("fa-angle-up");
 		}else if(self._opend_index_list[idx] == true){
 			self._opend_index_list[idx] = false;
-			$('#id_div_multi_'+idx).addClass("d-none");
-			$('#id_div_multi_'+idx).html('');
-			$('#id_icon_multi_'+idx).addClass("fa-angle-down");
-			$('#id_icon_multi_'+idx).removeClass("fa-angle-up");
+			$(`#id_div_multi_${self.PREFIX}_${music_uid}`).addClass("d-none");
+			$(`#id_div_multi_${self.PREFIX}_${music_uid}`).html('');
+			$(`#id_icon_multi_${self.PREFIX}_${music_uid}`).addClass("fa-angle-down");
+			$(`#id_icon_multi_${self.PREFIX}_${music_uid}`).removeClass("fa-angle-up");
 		}
 	};
 

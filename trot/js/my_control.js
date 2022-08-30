@@ -4,6 +4,7 @@ $('#document').ready(function(){
 
 function MyControl(){
 	var self = this;
+	this.PREFIX = 'MyControl';
 	this._single_list = [];
 	this._multi_list = [];
 	this._artist_list = [];
@@ -66,34 +67,37 @@ function MyControl(){
 
 	this._opend_index_list = [];
 	this.ShowMultiMusicList = function(idx){
+		var music = self._music_list[idx];
+		var music_uid = music.music_uid;
+
 		if(self._opend_index_list[idx] == undefined || self._opend_index_list[idx] == false){
 			self._opend_index_list[idx] = true;
-			var list = self._multi_list[idx].multi_music_list;
+			var list = music.multi_music_list;
 			list = list.replaceAll("\n", "<br>");
-			$('#id_div_multi_'+idx).removeClass("d-none");
-			$('#id_div_multi_'+idx).html(list);
-			$('#id_icon_multi_'+idx).removeClass("fa-angle-down");
-			$('#id_icon_multi_'+idx).addClass("fa-angle-up");
+			$(`#id_div_multi_${self.PREFIX}_${music_uid}`).removeClass("d-none");
+			$(`#id_div_multi_${self.PREFIX}_${music_uid}`).html(list);
+			$(`#id_icon_multi_${self.PREFIX}_${music_uid}`).removeClass("fa-angle-down");
+			$(`#id_icon_multi_${self.PREFIX}_${music_uid}`).addClass("fa-angle-up");
 		}else if(self._opend_index_list[idx] == true){
 			self._opend_index_list[idx] = false;
-			$('#id_div_multi_'+idx).addClass("d-none");
-			$('#id_div_multi_'+idx).html('');
-			$('#id_icon_multi_'+idx).addClass("fa-angle-down");
-			$('#id_icon_multi_'+idx).removeClass("fa-angle-up");
+			$(`#id_div_multi_${self.PREFIX}_${music_uid}`).addClass("d-none");
+			$(`#id_div_multi_${self.PREFIX}_${music_uid}`).html('');
+			$(`#id_icon_multi_${self.PREFIX}_${music_uid}`).addClass("fa-angle-down");
+			$(`#id_icon_multi_${self.PREFIX}_${music_uid}`).removeClass("fa-angle-up");
 		}
 	};
 
 	this.DISP_MultiList = function(){
 		var h = '';
 		for(var i=0 ; i<self._multi_list.length ; i++){
-			h += MusicItem('window._my_control', i, self._multi_list[i], 'multi');
+			h += MusicItem(self.PREFIX, 'window._my_control', i, self._multi_list[i], 'multi');
 		}
 		$('#id_div_my_multi_list').html(h);
 	};
 	this.DISP_SingleList = function(){
 		var h = '';
 		for(var i=0 ; i<self._single_list.length ; i++){
-			h += MusicItem('window._my_control', i, self._single_list[i], 'single');
+			h += MusicItem(self.PREFIX, 'window._my_control', i, self._single_list[i], 'single');
 		}
 		$('#id_div_my_single_list').html(h);
 	};
@@ -144,7 +148,7 @@ function MyControl(){
 	this.DISP_ArtistMusicList = function(){
 		var h = ``;
 		for(var i=0 ; i<self._artist_music_list.length ; i++){
-			h += MusicItem('window._my_control', i, self._artist_music_list[i], 'artist');
+			h += MusicItem(self.PREFIX, 'window._my_control', i, self._artist_music_list[i], 'artist');
 		}
 		$('#id_div_my_music_list').html(h);
 	};

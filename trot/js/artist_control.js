@@ -4,6 +4,7 @@ $('document').ready(function(){
 
 function ArtistControl(){
 	var self = this;
+	this.PREFIX = 'ArtistControl';
 	this._music_list = [];
 
 	this.Init = function(){
@@ -66,7 +67,7 @@ function ArtistControl(){
 		var h = ``;
 		for(var i=0 ; i<self._music_list.length ; i++){			
 			var music = self._music_list[i];
-			h += MusicItem(control, i, music);
+			h += MusicItem(self.PREFIX, control, i, music);
 		}
 		$('#id_div_artist_music_list').html(h);
 	};

@@ -1,5 +1,5 @@
 
-function MusicItem(control, index, music, sub_type){
+function MusicItem(prefix, control, index, music, sub_type){
 	var on_click_play = `${control}.SendMusicToPlayer(${index}, '${sub_type}')`;
 	var on_click_like = `${control}.LikeMusic(${index}, '${sub_type}')`;
 
@@ -22,7 +22,7 @@ function MusicItem(control, index, music, sub_type){
 	var more_icon = '';
 	var on_click_more = '';
 	if(music.multi_music_list != null && music.multi_music_list != ''){
-		more_icon = `<i id="id_icon_multi_${index}" class="fas fa-angle-down"></i>`;
+		more_icon = `<i id="id_icon_multi_${prefix}_${music.music_uid}" class="fas fa-angle-down"></i>`;
 		on_click_more = `${control}.ShowMultiMusicList(${index})`;
 	}
 
@@ -51,7 +51,7 @@ function MusicItem(control, index, music, sub_type){
 			</div>
 		</div>
 	</div>
-	<div id="id_div_multi_${index}" class="d-none border-bottom"></div>
+	<div id="id_div_multi_${prefix}_${music.music_uid}" class="d-none border-bottom"></div>
 	`;
 
 	return h;

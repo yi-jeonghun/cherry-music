@@ -4,6 +4,7 @@ $('document').ready(function(){
 
 function TVShowControl(){
 	var self = this;
+	this.PREFIX = 'TVShowControl';
 	this._tv_show_list = [];
 	this._music_list = [];
 
@@ -51,7 +52,7 @@ function TVShowControl(){
 		var h = ``;
 		for(var i=0 ; i<self._music_list.length ; i++){			
 			var music = self._music_list[i];
-			h += MusicItem(control, i, music);
+			h += MusicItem(self.PREFIX, control, i, music);
 		}
 		$('#id_div_tv_show_music_list').html(h);
 	};
@@ -60,5 +61,35 @@ function TVShowControl(){
 		$('#id_div_tv_show_detail').animate({
 			left: window.screen.width
 		});
+	};
+
+	this._opend_index_list = [];
+	this.ShowMultiMusicList = function(idx){
+		var music = self._music_list[idx];
+		var music_uid = music.music_uid;
+
+		if(self._opend_index_list[idx] == undefined || self._opend_index_list[idx] == false){
+			self._opend_index_list[idx] = true;
+			var list = music.multi_music_list;
+			list = list.replaceAll("\n", "<br>");
+			$(`#id_div_multi_${self.PREFIX}_${music_uid}`).removeClass("d-none");
+			$(`#id_div_multi_${self.PREFIX}_${music_uid}`).html(list);
+			$(`#id_icon_multi_${self.PREFIX}_${music_uid}`).removeClass("fa-angle-down");
+			$(`#id_icon_multi_${self.PREFIX}_${music_uid}`).addClass("fa-angle-up");
+		}else if(self._opend_index_list[idx] == true){
+			self._opend_index_list[idx] = false;
+			$(`#id_div_multi_${self.PREFIX}_${music_uid}`).addClass("d-none");
+			$(`#id_div_multi_${self.PREFIX}_${music_uid}`).html('');
+			$(`#id_icon_multi_${self.PREFIX}_${music_uid}`).addClass("fa-angle-down");
+			$(`#id_icon_multi_${self.PREFIX}_${music_uid}`).removeClass("fa-angle-up");
+		}
+	};
+
+	this.SendMusicToPlayer = function(index){
+		SendMessage_AddMusic(self._music_list[index]);
+	};
+
+	this.LikeMusic = function(index){
+		window._like_control.OnClickLikeMusic(self._music_list[index]);
 	};
 }
