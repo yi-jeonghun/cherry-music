@@ -112,7 +112,7 @@ function MyControl(){
 			var on_click_artist = `window._my_control.OnClick_ChooseArtist('${a.name}', '${a.artist_uid}')`;
 			var on_click_like = `window._like_control.OnClickLikeArtist('${a.artist_uid}', '${a.name}')`;
 			h += `
-			<div class="row border-bottom py-1">
+			<div class="row border-bottom py-2">
 				<div class="col-10 my-auto" style="cursor:pointer" onClick="${on_click_artist}">
 					${a.name}
 				</div>
