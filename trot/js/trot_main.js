@@ -24,7 +24,7 @@ function TrotMain(){
 				return;
 			}else if(message.head == 'MANGO'){
 				if(message.command == 'ChangeMenu'){
-					console.log('message.menu ' + message.menu);
+					// console.log('message.menu ' + message.menu);
 					self.OpenMenu(message.menu);
 				}else if(message.command == 'FindLikeMusic'){
 					for(var i=0 ; i<message.music_list.length ; i++){
@@ -62,7 +62,7 @@ function TrotMain(){
 	this._menu_loaded_pops = false;
 	
 	this.OpenMenu = function(menu, reload){
-		console.log('menu ' + menu);
+		// console.log('menu ' + menu);
 		$('#id_menu_top100').hide();
 		$('#id_menu_home').hide();
 		$('#id_menu_artist').hide();

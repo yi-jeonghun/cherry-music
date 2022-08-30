@@ -121,9 +121,9 @@ function LikeControl(){
 	};
 
 	this.FindMusicMulti = function(music_uid){
-		console.log('find music multi ' + music_uid);
+		// console.log('find music multi ' + music_uid);
 		for(var i=0 ; i<self._music_list_multi.length ; i++){
-			console.log(i + ' ' + self._music_list_multi[i].music_uid);
+			// console.log(i + ' ' + self._music_list_multi[i].music_uid);
 			if(self._music_list_multi[i].music_uid == music_uid){
 				return true;
 			}

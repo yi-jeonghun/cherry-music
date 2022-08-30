@@ -24,7 +24,7 @@ function TVShowControl(){
 				var on_click_tv_show = `window._tv_show_control.LoadMusicList('${tv.name}', '${tv.tv_show_uid}')`;
 
 				h += `
-				<div class="row border-bottom py-1">
+				<div class="row border-bottom py-2">
 				<div class="col-12 my-auto" style="cursor:pointer" onClick="${on_click_tv_show}">
 					${tv.name}
 				</div>
