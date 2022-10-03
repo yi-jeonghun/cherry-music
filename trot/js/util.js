@@ -90,4 +90,4 @@ function EscapeHtml(unsafe){
 				.replace(/>/g, "&gt;")
 				.replace(/"/g, "&quot;")
 				.replace(/'/g, "&#039;");
- }
+}
